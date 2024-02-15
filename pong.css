@@ -1,0 +1,28 @@
+body {
+    background-color: #080808;
+    justify-content: center;
+}
+
+a {
+    border: solid #ddd;
+    border-radius: 10px;
+    color: #ddd;
+    font-size: 20px;
+    padding: 5px;
+}
+
+h1 {
+    color:  #DAA520;
+    padding: 10px;
+}
+
+h2{
+    color: #fff;
+    padding: 20px;
+}
+
+button {
+    padding: 8px;
+    align-items: center;
+    
+}

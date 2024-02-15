@@ -1,0 +1,90 @@
+body {
+    background-color: #030303;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.navbar {
+    background-color: #808080;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.logo {
+    display: flex;
+    font-weight: bold;
+    font-size: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    justify-content:space-between;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.fa-bars {
+    display: none;
+    color: white; 
+    font-size: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.nav.show {
+    display: flex;
+}
+
+.navbar a:hover {
+    background-color: rgb(255, 75, 75);
+}
+
+@media(max-width: 600px){
+    .navbar {
+        flex-direction: column;
+    }
+    .nav {
+        flex-direction: column;
+        display: none;
+    }
+
+    .fa-bars {
+        display: flex;
+    }
+}
+
+h1 {
+    color:  #DAA520;
+    text-align: center;
+}
+
+p{
+    color: #fff;
+    text-align: center;
+}
+
+#spill {
+    text-decoration: none;
+    color: #DAA520;
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#ping-yt {
+    color: #DAA520;
+    font-size: 18px;
+    padding: 10px 35%;
+    text-align: center;
+    text-decoration: none;
+}

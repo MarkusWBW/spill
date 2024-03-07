@@ -96,7 +96,7 @@ class Rektangel:
         # Sjekker kollisjon med venstre side
         if self.x - 50 <= 0:
             self.vx *= -1
-            self.x = 0 + 50 
+            self.x = 50 
 
         # Sjekker kollisjon med toppen 
         if self.y - 50 <= 0:
@@ -173,10 +173,13 @@ def collision(ball, paddle1, paddle2, paddle3, paddle4):
     if ball.x - ball.r <= paddle1.x + paddle1.w:
         if ball.y + ball.r >= paddle1.y and ball.y - ball.r <= paddle1.y + paddle1.h:
             ball.vx *= -1.5
+            ball.vy = math.cos(random.randint(30, 150))
+            
     # Sjekker om ballen treffer topp paddle 
     if ball.y - ball.r <= paddle3.y + paddle3.h:
         if ball.x + ball.r >= paddle3.x and ball.x - ball.r <= paddle3.x + paddle3.w:
             ball.vy *= -1.5
+            ball.vx = math.cos(random.randint(30,150))
             
             
     # Sjekker om ballen treffer rød side
@@ -191,10 +194,12 @@ def collision(ball, paddle1, paddle2, paddle3, paddle4):
     if ball.x + ball.r >= paddle2.x:
         if ball.y + ball.r >= paddle2.y and ball.y - ball.r <= paddle2.y + paddle2.h:
             ball.vx *= -1.5
+            ball.vy = math.cos(random.randint(30,150))
     # Sjekker om ballen treffer bunn paddle 
     elif ball.y + ball.r >= paddle4.y:
         if ball.x + ball.r >= paddle4.x and ball.x - ball.r <= paddle4.x + paddle4.w:
             ball.vy *= -1.5
+            ball.vx = math.cos(random.randint(30,150))
 
     # Sjekker om ballen treffer blå side
     if ball.x > WIDTH - 60 or ball.y > HEIGHT - 60:

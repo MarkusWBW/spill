@@ -1,61 +1,81 @@
 body {
-  background-color: #080808;
-  font-family: Arial, sans-serif;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    
 }
 
 a {
-  border: solid #ddd;
-  border-radius: 10px;
-  color: #ddd;
-  font-size: 20px;
-  padding: 5px;
+    border: solid #ddd;
+    border-radius: 10px;
+    color: #ddd;
+    font-size: 20px;
+    padding: 5px;
 }
 
-h1 {
-  text-align: center;
-  margin-top: 50px;
-  font-size: 36px;
-  color: #DAA520;
+h1   {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 36px;
+    color: #000;
 }
 
-#klikk-knapp {
-  display: block;
-  margin: 0 auto;
-  width: 200px;
-  height: 200px;
-  background-color: #DAA520;
-  color: #fff;
-  font-size: 24px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 200px;
-  cursor: pointer;
+
+.sirkler{
+    
+    display: flex;
+    justify-content: center;
 }
 
-#klikk-knapp:hover {
-  background-color: #DAA520;
+#sirkel1{
+    background-color: #f00;
+}
+#sirkel2{
+    background-color: #00f;
+}
+
+.sirkel {
+    
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    background-color: #DAA520;
+    color: #fff;
+    font-size: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 200px;
+    cursor: pointer;
+}
+
+
+.sirkel:hover {
+    background-color: #DAA520;
 }
 
 #timer {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 24px;
-  color: #DAA520;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+    color: #000;
 }
 
 #teller {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 36px;
-  color: #808080;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 36px;
+    color: #808080;
 }
 
 #restart-knapp {
-  padding: 10px 20px;
-  background-color: #808080;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer; 
-  margin: 20px auto;
+    align-items: center;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #808080;
+    color: #fff;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer; 
+    margin: 20px auto;
+    
 }

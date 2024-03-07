@@ -9,17 +9,24 @@
     <link rel="stylesheet" href="klikk.css">
 </head>
 <body>
-    <a href="../spill.html">Spill</a>
+        
+  
+    <div class="Spiller">
 
-    <h1>Klikkekrig</h1>
+        <h1>Klikkekrig</h1>
+        
+        <div class="sirkler">
+        <div id="sirkel1" class="sirkel">Score: <span id="score1">0</span></div>
+        <div id="sirkel2" class="sirkel">Score: <span id="score2">0</span></div>
+        
+        </div>
+        <div id="timer">Tid igjen: <span id="tid">10</span> sekunder</div>
 
-    <button id="klikk-knapp">Klikk meg!</button>
+       
 
-    <div id="timer">Tid igjen: <span id="tid">30</span> sekunder</div>
+        <button id="restart-knapp">Start på nytt</button>
 
-    <div id="teller">Klikk: <span id="tall">0</span> ganger</div>
-
-    <button id="restart-knapp">Start på nytt</button>
+     </div>
     
 
     <script src="klikk.js"></script>

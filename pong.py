@@ -220,14 +220,12 @@ def collision(ball, paddle1, paddle2, paddle3, paddle4):
     
     # Sjekker om en spiller har vunnet
     if paddle1.score >= 5:
-        drawText("Rød spiller vant", WIDTH//2, HEIGHT//2 - 100, BLACK, 50)
         paddle1.score = 0
         paddle2.score = 0 
         gameOver = True
         
         
     elif paddle2.score >= 5:
-        drawText("Blå spiller vant", WIDTH//2, HEIGHT//2 - 100, BLACK, 50)
         paddle1.score = 0
         paddle2.score = 0
         gameOver = True

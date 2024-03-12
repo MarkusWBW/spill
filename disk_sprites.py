@@ -4,7 +4,7 @@ from disk_settings import *
 from math import sqrt
     
     
-# Lager en klasse for gjeteren
+# Lager en klasse for frisbeen
 class Frisbee:
     def __init__(self):
         self.x = WIDTH//2
@@ -34,7 +34,7 @@ class Frisbee:
             self.x = WIDTH - self.r
         
         # Sjekker kollisjon med venstre side
-        elif self.x <= -self.r:
+        elif self.x <= 0:
             self.vx *= -1
             self.x = 0
         
@@ -44,7 +44,7 @@ class Frisbee:
             self.y = HEIGHT - self.r
         
         # Sjekker kollisjon med topp
-        elif self.y <= -self.r:
+        elif self.y <= 0:
             self.vy *= -1
             self.y = 0
         
@@ -121,7 +121,12 @@ class Frisbee:
         text_img = font.render(f"Antall kast: {self.throws}", True, WHITE)
         surface.blit(text_img, (20, 10))
         
-# Lager en klasse for hindrene 
+    def newMap(self):
+        self.x = WIDTH//2
+        self.y = HEIGHT - 30
+        
+        
+# Lager en klasse for trærne 
 class Tree:
     def __init__(self, x, y, w, h):
         self.x = x
@@ -139,13 +144,14 @@ class Tree:
         self.rect.y = self.y
         
         
+        
 # Lager en vei for frisbeen
 class Path:
     def __init__(self):
         self.w = random.randint(50, 80)
         self.h = HEIGHT
         self.x = random.randint(100, WIDTH-100 - self.w)
-        self.y = 10
+        self.y = 0
         
         self.image = pg.Surface((self.w, self.h))
         self.image.fill(WHITE)
@@ -154,11 +160,16 @@ class Path:
         self.rect.x = self.x
         self.rect.y = self.y
         
+    def newMap(self):
+        self.w = random.randint(50, 80)
+        self.x = random.randint(100, WIDTH-100 - self.w)
         
+        
+# Lager en kurv     
 class Basket:
     def __init__(self):
-        self.x = WIDTH//2 
-        self.y = 50
+        self.x = random.randint(150, WIDTH-185) 
+        self.y = random.randint(20, 70)
         self.r = 35
         
         self.image = pg.Surface((self.r, self.r))
@@ -178,9 +189,11 @@ class Basket:
         
         text_img = font.render(f"Hull nummer: {self.hole}", True, WHITE)
         surface.blit(text_img, (WIDTH - 160, 10))
-
     
     
+    def newMap(self):
+        self.x = random.randint(150, WIDTH-185) 
+        self.y = random.randint(20, 70)
     
     
     

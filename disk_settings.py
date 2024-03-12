@@ -1,3 +1,4 @@
+import pygame as pg
 # Konstanter
 WIDTH = 800  # Bredden til vinduet
 HEIGHT = 600 # Høyden til vinduet
@@ -22,5 +23,10 @@ LIGHTRED = (255, 100, 100)
 # Innstillinger til spilleren
 PLAYER_WIDTH = 20
 PLAYER_HEIGHT = 20
-PLAYER_ACC = 0.5
-PLAYER_FRICTION = -0.12
+SPEED = 500
+
+# Henter inn bilder til spillet
+grass_img = pg.image.load('grass.png')
+
+# Lager en overflate (surface) vi kan tegne på
+surface = pg.display.set_mode(SIZE)

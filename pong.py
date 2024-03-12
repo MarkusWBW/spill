@@ -69,7 +69,7 @@ class Rektangel:
         self.color = color
         
         # Hastighet/fart
-        self.speed = 5
+        self.speed = 8
         self.vx = 0
         self.vy = 0
         
@@ -121,7 +121,6 @@ class Paddle(Rektangel):
         self.vx = 0 
         
 
-
 # Klasse for sirkler
 class Circle:
     def __init__(self, x, y, r):
@@ -131,8 +130,8 @@ class Circle:
         self.color = GREEN
         
         # Oppdaterer posisjonen fra farten
-        self.vx = random.randint(-4, 4)
-        self.vy = random.randint(-2, 2)
+        self.vx = random.randint(-2, 2)
+        self.vy = random.randint(-1, 1)
     
     # Tegner ballen 
     def draw(self):
@@ -144,6 +143,7 @@ class Circle:
         self.x += self.vx
         self.y += self.vy
         
+        # Setter en maksfart for ballen
         if self.vx >= 6:
             self.vx = 6
         elif self.vx <= -6:
@@ -158,11 +158,21 @@ class Circle:
         self.y = HEIGHT//2
         self.vx = random.randint(-4,4)
         self.vy = random.randint(-2,2)
-        if self.vx == 0:
-            self.vx = 0.5
-        elif self.vy == 0:
-            self.vy = 0.5 
-        
+        # Passer på at ballen ikke går for sakte eller står stille
+        if self.vx <= 0.5:
+            if self.vy <= 0.5:
+                self.vx = 1
+                self.vy = 1
+            elif self.vy >= -0.5:
+                self.vx = 1
+                self.vy = -1
+        if self.vx >= -0.5:
+            if self.vy <= 0.5:
+                self.vx = -1
+                self.vy = 1
+            elif self.vy >= -0.5:
+                self.vx = -1
+                self.vy = -1
         
 # Funksjon som sjekker kollisjon mellom ball og padle
 def collision(ball, paddle1, paddle2, paddle3, paddle4):
@@ -173,17 +183,17 @@ def collision(ball, paddle1, paddle2, paddle3, paddle4):
     if ball.x - ball.r <= paddle1.x + paddle1.w:
         if ball.y + ball.r >= paddle1.y and ball.y - ball.r <= paddle1.y + paddle1.h:
             ball.vx *= -1.5
-            ball.vy = math.cos(random.randint(30, 150))
+            ball.vy += math.sin(random.randint(30, 150))
             
     # Sjekker om ballen treffer topp paddle 
     if ball.y - ball.r <= paddle3.y + paddle3.h:
         if ball.x + ball.r >= paddle3.x and ball.x - ball.r <= paddle3.x + paddle3.w:
             ball.vy *= -1.5
-            ball.vx = math.cos(random.randint(30,150))
+            ball.vx += math.cos(random.randint(30,150))
             
             
     # Sjekker om ballen treffer rød side
-    if ball.x < 60 or ball.y < 60:
+    if ball.x < 70 or ball.y < 70:
         paddle2.score += 1 # Øker score til høyre spiller
         # Nullstiller ballen
         ball.reset()
@@ -194,15 +204,15 @@ def collision(ball, paddle1, paddle2, paddle3, paddle4):
     if ball.x + ball.r >= paddle2.x:
         if ball.y + ball.r >= paddle2.y and ball.y - ball.r <= paddle2.y + paddle2.h:
             ball.vx *= -1.5
-            ball.vy = math.cos(random.randint(30,150))
+            ball.vy += math.sin(random.randint(30,150))
     # Sjekker om ballen treffer bunn paddle 
     elif ball.y + ball.r >= paddle4.y:
         if ball.x + ball.r >= paddle4.x and ball.x - ball.r <= paddle4.x + paddle4.w:
             ball.vy *= -1.5
-            ball.vx = math.cos(random.randint(30,150))
+            ball.vx += math.cos(random.randint(30,150))
 
     # Sjekker om ballen treffer blå side
-    if ball.x > WIDTH - 60 or ball.y > HEIGHT - 60:
+    if ball.x > WIDTH - 70  or ball.y > HEIGHT - 70:
         paddle1.score += 1 # Øker score til rød spiller
         # Nullstiller ballen  
         ball.reset()
@@ -210,17 +220,17 @@ def collision(ball, paddle1, paddle2, paddle3, paddle4):
     
     # Sjekker om en spiller har vunnet
     if paddle1.score >= 5:
+        drawText("Rød spiller vant", WIDTH//2, HEIGHT//2 - 100, BLACK, 50)
+        paddle1.score = 0
+        paddle2.score = 0 
         gameOver = True
-        drawText("Venstre spiller vant", WIDTH//2, HEIGHT//2 - 100, BLACK, 50)
-        paddle2.score = 0
-        paddle1.score = 0 
+        
         
     elif paddle2.score >= 5:
-        gameOver = True
-        drawText("Høyre spiller vant", WIDTH//2, HEIGHT//2 - 100, BLACK, 50)
+        drawText("Blå spiller vant", WIDTH//2, HEIGHT//2 - 100, BLACK, 50)
+        paddle1.score = 0
         paddle2.score = 0
-        paddle1.score = 0 
-        
+        gameOver = True
 
 # Lager objekter
 player1 = Paddle(30, HEIGHT//2, 20, 120, RED)
@@ -250,7 +260,8 @@ class Button():
             b_text = b_font.render(self.b_text, 1, (0,0,0))
             # Putter knappen i midten
             win.blit(b_text, (self.x + (self.w/2 - b_text.get_width()/2), self.y + (self.h/2 - b_text.get_height()/2)))
-            
+    
+    # sjekker om musen er over knappen
     def isOver(self, pos):
         if pos[0] > self.x and pos[0] < self.x + self.w:
             if pos[1] > self.y and pos[1] < self.y + self.h:
@@ -288,17 +299,16 @@ while run:
             # Finner posisjonen til musen 
             pos = pg.mouse.get_pos()
             
-            if event.type == pg.MOUSEBUTTONDOWN:
-                if button.isOver(pos):
-                    print("Du har startet spillet")
-                    gameOver = False
-                    
-            
             if event.type == pg.MOUSEMOTION:
                 if button.isOver(pos):
                     button.color = RED
                 else:
-                    button.color = GREEN 
+                    button.color = GREEN
+                    
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if button.isOver(pos):
+                    gameOver = False
+                    
         
     
     if not gameOver:

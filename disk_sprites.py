@@ -124,6 +124,8 @@ class Frisbee:
     def newMap(self):
         self.x = WIDTH//2
         self.y = HEIGHT - 30
+        self.vx = 0
+        self.vy = 0 
         
         
 # Lager en klasse for trærne 

@@ -3,13 +3,6 @@ import sys, random
 from disk_settings import *
 from disk_sprites import * 
 
-# Lager en liste for trærne
-tree_list = []
-
-# Putter skog inn på sidene 
-tree_list.append(Tree(0, 0, 100, HEIGHT))
-tree_list.append(Tree(WIDTH-100, 0, 100, HEIGHT))
-
 class Game:
     def __init__(self):
         # Initiere pygame
@@ -34,7 +27,15 @@ class Game:
         
         self.path = Path()
         
-        while len(tree_list) < 100:
+        # Lager en liste for trærne
+        self.tree_list = []
+
+        # Putter skog inn på sidene 
+        self.tree_list.append(Tree(0, 0, 100, HEIGHT))
+        self.tree_list.append(Tree(WIDTH-100, 0, 100, HEIGHT))
+        
+        #Lager trær
+        while len(self.tree_list) < 100:
             # Lager nytt tre
             new_tree = Tree(
                 random.randint(80, WIDTH - 80),
@@ -57,7 +58,7 @@ class Game:
                     
             if safe:
                 # Legger i lista
-                tree_list.append(new_tree)
+                self.tree_list.append(new_tree)
                 
         
         self.run()
@@ -105,7 +106,7 @@ class Game:
             
             
         # Sjekker om frisbeen kolliderer med et tre 
-        for t in tree_list: 
+        for t in self.tree_list: 
             if pg.Rect.colliderect(self.frisbee.rect, t.rect):
                 collide = True
                 break
@@ -123,7 +124,7 @@ class Game:
         self.screen.blit(grass_img, (0,0))
         
         # Tegner trærne
-        for t in tree_list:
+        for t in self.tree_list:
             self.screen.blit(t.image, (t.rect.x, t.rect.y))
         
         # Tegner kurven
@@ -143,12 +144,10 @@ class Game:
         self.basket.newMap()
         self.path.newMap()
         
-        old_list = tree_list
+        self.tree_list = self.tree_list[0:2]
         
-        tree_list = old_list[:2]
-        
-        # Lager trær
-        while len(tree_list) < 100:
+        #Lager trær
+        while len(self.tree_list) < 100:
             # Lager nytt tre
             new_tree = Tree(
                 random.randint(80, WIDTH - 80),
@@ -171,7 +170,7 @@ class Game:
                     
             if safe:
                 # Legger i lista
-                tree_list.append(new_tree)
+                self.tree_list.append(new_tree)
             
         
 
